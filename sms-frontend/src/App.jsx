@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import StudentPortal from './Component/StudentPortal'
+import StudentPortal from './Component/Student/StudentPortal'
 import ManageStudents from './pages/ManageStudents';
 import ManageCourses from './pages/ManageCourses';
 import ViewAudit from './pages/ViewAudit';
