@@ -5,6 +5,9 @@ import com.example.Student.Management.System.model.Course;
 import com.example.Student.Management.System.repo.CourseRepository;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 
@@ -33,5 +36,23 @@ public class CourseService {
         course.getStudentIds().remove(studentId);
         courseRepository.save(course);
     }
+
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
+    }
+
+    public List<Long> getAllStudentId(Long courseId) {
+        Course course = courseRepository.findById(courseId)
+            .orElseThrow(() -> new RuntimeException("Course not found with id: " + courseId));
+        return course.getStudentIds();    }
+
+
+    public void removeCourse(Long courseId) {
+        if (courseRepository.existsById(courseId)) courseRepository.deleteById(courseId);
+        else {
+            throw new RuntimeException("Student not found with ID: " + courseId);
+        }
+    }
+
 
 }
