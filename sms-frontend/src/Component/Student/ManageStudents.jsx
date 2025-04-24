@@ -30,6 +30,10 @@ export default function StudentManagementPage() {
     }
   };
 
+  const handleRowClick = (studentId) => {
+    navigate(`/student-details/${studentId}`);
+  };
+
   const handleSearch = async () => {
     if (!searchTerm.trim()) {
       fetchStudents();
@@ -130,7 +134,11 @@ export default function StudentManagementPage() {
               <tbody>
                 {students.length > 0 ? (
                   students.map((student) => (
-                    <tr key={student.id} className="hover:bg-gray-50">
+                    <tr 
+                      key={student.id} 
+                      className="hover:bg-gray-50 cursor-pointer"
+                      onClick={() => handleRowClick(student.id)}
+                    >
                       <td className="border p-2">{student.id}</td>
                       <td className="border p-2">{student.firstName}</td>
                       <td className="border p-2">{student.lastName}</td>
