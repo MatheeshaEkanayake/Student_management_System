@@ -1,5 +1,6 @@
 package com.example.Student.Management.System.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,8 +23,13 @@ public class AuditLog {
     private String tableName;
     private String operation;
     private Long recordId;
+
+    @Column(columnDefinition = "TEXT")
     private String oldData;
+
+    @Column(columnDefinition = "TEXT")
     private String newData;
+    
     private LocalDateTime createdAt;
 
 

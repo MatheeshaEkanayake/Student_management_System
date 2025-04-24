@@ -7,14 +7,18 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.Student.Management.System.model.Student;
 import com.example.Student.Management.System.repo.StudentRepository;
 
+import jakarta.transaction.Transactional;
+
 import java.io.IOException;
 import java.util.List;
 
 @Service
+@Transactional
 public class StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
+
 
     public Student addStudent(Student student, MultipartFile imageFile) throws IOException {
         
@@ -24,6 +28,7 @@ public class StudentService {
         
         return studentRepository.save(student);
     }
+
 
     public Student updateStudent(Long id, Student studentDetails, MultipartFile imageFile) throws IOException {
         return studentRepository.findById(id).map(student -> {
@@ -49,11 +54,13 @@ public class StudentService {
     }
 
      // Get all students
+
      public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
     // Search students by first name (case-insensitive)
+
     public List<Student> searchStudentsByName(String name) {
         return studentRepository.findByFirstNameContainingIgnoreCase(name);
     }
