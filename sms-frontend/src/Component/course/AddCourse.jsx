@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/logo.png';
+
 
 export default function AddCoursePage() {
   const navigate = useNavigate();
@@ -58,9 +60,13 @@ export default function AddCoursePage() {
       {/* Sidebar */}
       <div className="w-64 bg-blue-500">
         <div className="p-6">
-          <div className="w-24 h-24 mx-auto bg-gray-400 rounded-full">
-            {/* Course icon or logo could go here */}
-          </div>
+        <div className="w-24 h-24 mx-auto rounded-full overflow-hidden">
+          <img 
+            src={logo} 
+            alt="Logo" 
+            className="w-full h-full object-cover"
+          />
+        </div>
         </div>
         
         {/* Navigation buttons */}

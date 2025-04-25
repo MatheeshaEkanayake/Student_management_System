@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/logo.png'; // Adjust the path as necessary
 
 export default function AddStudentPage() {
   const navigate = useNavigate();
@@ -14,7 +15,6 @@ export default function AddStudentPage() {
     dateOfBirth: '',
     email: '',
     degreeProgram: '',
-    id: ''
   });
   
   const [imageFile, setImageFile] = useState(null);
@@ -41,12 +41,6 @@ export default function AddStudentPage() {
     if (file) {
       setImageFile(file);
       
-      // Create preview
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result);
-      };
-      reader.readAsDataURL(file);
     }
   };
   
@@ -96,17 +90,15 @@ export default function AddStudentPage() {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <div className="w-64 bg-blue-500">
+      <div className="fixed w-64 h-screen bg-blue-500 overflow-y-auto">
         <div className="p-6">
-          <div className="w-24 h-24 mx-auto bg-gray-400 rounded-full">
-            {imagePreview && (
-              <img 
-                src={imagePreview} 
-                alt="Student Preview" 
-                className="w-24 h-24 rounded-full object-cover"
-              />
-            )}
-          </div>
+        <div className="w-24 h-24 mx-auto rounded-full overflow-hidden">
+          <img 
+            src={logo} 
+            alt="Logo" 
+            className="w-full h-full object-cover"
+          />
+        </div>
         </div>
         
         {/* Navigation buttons (lowered by margin-top) */}
@@ -135,7 +127,7 @@ export default function AddStudentPage() {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 p-8">
+      <div className="ml-64 flex-1 p-8 overflow-x-auto">
         <h1 className="text-2xl font-semibold text-gray-700 mb-8">Add Students</h1>
         
         {success && (
@@ -203,19 +195,6 @@ export default function AddStudentPage() {
             />
           </div>
           
-          {/* Student ID (Optional as it's auto-generated) */}
-          <div className="mb-6">
-            <label className="block text-gray-700 mb-2">Student ID</label>
-            <input
-              type="text"
-              name="id"
-              className="border rounded p-2 w-full"
-              value={formData.id}
-              onChange={handleChange}
-              placeholder="Leave blank for auto-generation"
-            />
-          </div>
-          
           {/* Email */}
           <div className="mb-6">
             <label className="block text-gray-700 mb-2">Email</label>
@@ -250,13 +229,24 @@ export default function AddStudentPage() {
           
           {/* Student Image */}
           <div className="mb-8">
-            <label className="block text-gray-700 mb-2">Student Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="border rounded p-2 w-full"
-            />
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Student Image
+            </label>
+            <div className="flex items-center gap-4">
+              <label htmlFor="studentImage" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer focus:outline-none focus:shadow-outline">
+                Choose File
+              </label>
+              <span className="text-gray-600">
+                {imageFile ? imageFile.name : 'No file chosen'}
+              </span>
+              <input
+                type="file"
+                id="studentImage"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+              />
+            </div>
           </div>
           
           {/* Submit Button */}

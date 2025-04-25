@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/logo.png'; // Adjust the path as necessary
 
 export default function CourseManagementPage() {
   const [courses, setCourses] = useState([]);
@@ -63,7 +64,13 @@ export default function CourseManagementPage() {
       {/* Sidebar */}
       <div className="w-64 bg-blue-500">
         <div className="p-6">
-          <div className="w-24 h-24 mx-auto bg-gray-400 rounded-full"></div>
+        <div className="w-24 h-24 mx-auto rounded-full overflow-hidden">
+          <img 
+            src={logo} 
+            alt="Logo" 
+            className="w-full h-full object-cover"
+          />
+        </div>
         </div>
         
         <div className="mt-12">
@@ -101,18 +108,24 @@ export default function CourseManagementPage() {
                   <th className="border p-2 text-left">ID</th>
                   <th className="border p-2 text-left">Course Name</th>
                   <th className="border p-2 text-left">Description</th>
-                  <th className="border p-2 text-left">Actions</th>
+                  <th className="border p-2 text-left">StudentIds</th>
                 </tr>
               </thead>
               <tbody>
                 {courses.length > 0 ? (
                   courses.map((course) => (
-                    <tr key={course.id} className="hover:bg-gray-50">
+                    <tr 
+                      key={course.id} 
+                      className="hover:bg-gray-50 cursor-pointer"
+                      onClick={() => navigate(`/course-details/${course.id}`)}
+                    >
                       <td className="border p-2">{course.id}</td>
                       <td className="border p-2">{course.name}</td>
                       <td className="border p-2">{course.description}</td>
                       <td className="border p-2">
-                        <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => navigate(`/remove-course/${course.id}`)}>Remove</button>
+                        {Array.isArray(course.studentIds) 
+                          ? course.studentIds.join(', ')
+                          : course.studentIds || 'No students'}
                       </td>
                     </tr>
                   ))

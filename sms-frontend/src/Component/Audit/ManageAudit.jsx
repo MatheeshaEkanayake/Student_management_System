@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/logo.png';
 
 export default function ManageAuditPage() {
   const [auditRecords, setAuditRecords] = useState([]);
@@ -32,9 +33,15 @@ export default function ManageAuditPage() {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <div className="w-64 bg-blue-500">
+      <div className="fixed w-64 h-screen bg-blue-500 overflow-y-auto">
         <div className="p-6">
-          <div className="w-24 h-24 mx-auto bg-gray-400 rounded-full"></div>
+        <div className="w-24 h-24 mx-auto rounded-full overflow-hidden">
+          <img 
+            src={logo} 
+            alt="Logo" 
+            className="w-full h-full object-cover"
+          />
+        </div>
         </div>
         
         <div className="mt-12">
@@ -62,7 +69,7 @@ export default function ManageAuditPage() {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 p-8">
+      <div className="ml-64 flex-1 p-8 overflow-x-auto">
         <div className="flex justify-between mb-6">
           <h1 className="text-2xl font-bold">Audit Records</h1>
         </div>
@@ -88,7 +95,11 @@ export default function ManageAuditPage() {
               <tbody>
               {auditRecords.length > 0 ? (
                 auditRecords.map((record) => (
-                  <tr key={record.id} className="hover:bg-gray-50">
+                  <tr 
+                    key={record.id} 
+                    className="hover:bg-gray-50 cursor-pointer"
+                    onClick={() => navigate(`/audit/${record.id}`)}
+                  >
                     <td className="border p-2">{record.id}</td>
                     <td className="border p-2">{record.tableName}</td>
                     <td className="border p-2">{record.operation}</td>

@@ -8,6 +8,8 @@ import StudentDetails from './Component/Student/StudentDetails';
 import ManageCourses from './Component/Course/ManageCourse';
 import AddCoursePage from './Component/Course/AddCourse';
 import ManageAudit from './Component/Audit/ManageAudit';
+import AuditDetailsPage from './Component/Audit/AuditDetails';
+import CourseDetails from './Component/Course/CourseDetails';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
       <Route path="/manage-courses" element={<ManageCourses />} />
       <Route path="/add-course" element={<AddCoursePage />} />
       <Route path="/view-audit" element={<ManageAudit />} />
+      <Route path="/audit/:id" element={<AuditDetailsPage />} />
+      <Route path="/course-details/:id" element={<CourseDetails />} />
     </Routes>
   );
 }

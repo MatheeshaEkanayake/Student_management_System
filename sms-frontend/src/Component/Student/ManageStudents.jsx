@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/logo.png'; // Adjust the path as necessary
 
 export default function StudentManagementPage() {
   const [students, setStudents] = useState([]);
@@ -65,9 +66,15 @@ export default function StudentManagementPage() {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <div className="w-64 bg-blue-500">
+      <div className="fixed w-64 h-screen bg-blue-500 overflow-y-auto">
         <div className="p-6">
-          <div className="w-24 h-24 mx-auto bg-gray-400 rounded-full"></div>
+        <div className="w-24 h-24 mx-auto rounded-full overflow-hidden">
+          <img 
+            src={logo} 
+            alt="Logo" 
+            className="w-full h-full object-cover"
+          />
+        </div>
         </div>
         
         {/* Lowered nav buttons by adding margin-top */}
@@ -96,12 +103,12 @@ export default function StudentManagementPage() {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 p-8">
+      <div className="ml-64 flex-1 p-8 overflow-x-auto">
         <div className="flex justify-between mb-6">
           <div className="relative w-1/2">
             <input
               type="text"
-              placeholder="search"
+              placeholder="Search By Name"
               className="w-full p-2 pl-4 bg-gray-300 rounded-full"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
