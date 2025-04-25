@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 
@@ -50,9 +49,16 @@ public class CourseController {
         return courseService.getAllCourses();
     }
 
+    @GetMapping("/{courseId}")
+    public ResponseEntity<Course> getCourseById(@PathVariable Long courseId) {
+        Course course = courseService.getCourseById(courseId);
+        return ResponseEntity.ok(course);
+    }
+
     @GetMapping("/{courseId}/all")
     public List<Long> getStudentId(@PathVariable Long courseId) {
         return courseService.getAllStudentId(courseId);
+
     }
     
     

@@ -9,7 +9,9 @@ import com.example.Student.Management.System.model.AuditLog;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
@@ -24,5 +26,13 @@ public class AuditController {
         return auditService.getAllAuditData();
     }
     
-
+    @GetMapping("/{id}")
+    public ResponseEntity<AuditLog> getAuditLogById(@PathVariable Long id) {
+        AuditLog auditLog = auditService.getAuditLogById(id);
+        if (auditLog != null) {
+            return ResponseEntity.ok(auditLog);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    
 }

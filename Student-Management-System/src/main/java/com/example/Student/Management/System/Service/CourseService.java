@@ -54,5 +54,10 @@ public class CourseService {
         }
     }
 
+    public Course getCourseById(Long courseId) {
+        return courseRepository.findById(courseId)
+                .orElseThrow(() -> new RuntimeException("Course not found with id: " + courseId));
+    }
+
 
 }

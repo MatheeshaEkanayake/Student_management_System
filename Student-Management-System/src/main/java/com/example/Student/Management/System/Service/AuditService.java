@@ -20,4 +20,10 @@ public class AuditService {
         return auditLogs;
     }
 
+    public AuditLog getAuditLogById(Long id) {
+            return auditLogRepository.findById(id)
+                    .orElse(null);
+        }
+    
+
 }
